@@ -20,7 +20,7 @@ const AboutSection = () => {
   ]
 
   return (
-    <section ref={ref} className="py-24 bg-white relative overflow-hidden">
+    <section ref={ref} className="pt-20 pb-16 md:pt-24 md:pb-20 lg:pt-28 lg:pb-24 bg-white relative overflow-visible">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Content */}

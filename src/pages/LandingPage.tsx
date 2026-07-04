@@ -266,7 +266,7 @@ export default function LandingPage() {
       </div>
 
       {/* Header with Brand Logo */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-slate-950/90 backdrop-blur-2xl border-b border-emerald-900/30">
+      <header className="fixed top-0 left-0 right-0 z-[100] bg-slate-950/90 backdrop-blur-2xl border-b border-emerald-900/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo with Brand Image */}
@@ -310,7 +310,7 @@ export default function LandingPage() {
       </header>
 
       {/* Hero Section - Using Brand Image */}
-      <section className="relative pt-32 pb-20 lg:pt-44 lg:pb-32 overflow-hidden">
+      <section className="relative pt-28 pb-20 lg:pt-40 lg:pb-32 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center lg:text-left relative z-10">
@@ -535,9 +535,9 @@ export default function LandingPage() {
 
           <div className="grid md:grid-cols-3 gap-8">
             {accountTypes.map((account, i) => (
-              <motion.div key={account.type} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} whileHover={{ y: -8, transition: { duration: 0.3 } }} className="relative glass-card p-8 border border-emerald-500/20 hover:border-emerald-500/40">
+              <motion.div key={account.type} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} whileHover={{ y: -8, transition: { duration: 0.3 } }} className="relative overflow-visible glass-card p-8 border border-emerald-500/20 hover:border-emerald-500/40">
                 {account.highlight && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 text-xs font-bold text-white">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 text-xs font-bold text-white shadow-lg shadow-emerald-500/30 z-10">
                     {account.highlight}
                   </div>
                 )}

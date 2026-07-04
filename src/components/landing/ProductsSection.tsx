@@ -46,7 +46,7 @@ const ProductsSection = () => {
   ]
 
   return (
-    <section ref={ref} className="py-24 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 relative overflow-hidden">
+    <section ref={ref} className="pt-24 pb-16 md:pt-28 md:pb-20 lg:pt-32 lg:pb-24 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 relative overflow-visible">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -73,7 +73,7 @@ const ProductsSection = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mb-12"
         >
-          <div className="glass-card rounded-3xl overflow-hidden">
+          <div className="glass-card rounded-3xl overflow-visible">
             <div className="grid md:grid-cols-2 gap-0">
               <div className="p-8 md:p-12 flex flex-col justify-center">
                 <span className="inline-block px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-sm font-semibold mb-4 w-fit">
