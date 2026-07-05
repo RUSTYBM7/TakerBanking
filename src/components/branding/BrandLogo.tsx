@@ -7,7 +7,8 @@
 
 import React from 'react';
 
-export const BRAND_LOGO_URL = '/assets/logo/orbitpay-logo.svg';
+// Using the OrbitPay corporate banner image as the main logo
+export const BRAND_LOGO_URL = '/assets/images/corporate-banner.jpg';
 
 export interface BrandLogoProps {
   variant?: 'header' | 'nav' | 'hero' | 'footer' | 'auth' | 'card' | 'modal' | 'settings' | 'compact' | 'full';
@@ -46,7 +47,6 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
         ${className}
       `}
       style={{
-        aspectRatio: '2064 / 512',
         ...style,
       }}
     />
