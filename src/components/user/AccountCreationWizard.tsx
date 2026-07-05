@@ -1404,10 +1404,10 @@ export default function AccountCreationWizard({ onComplete, onCancel }: AccountC
   const restrictedBackSteps = ['verification', 'id_upload', 'review'];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50">
+    <div className="flex flex-col min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50">
       {/* Header - Hidden on welcome and complete */}
       {currentStep.id !== 'welcome' && currentStep.id !== 'complete' && (
-        <div className="sticky top-0 bg-white/90 backdrop-blur-lg z-50 border-b border-gray-100">
+        <div className="flex-none sticky top-0 bg-white/90 backdrop-blur-lg z-40 border-b border-gray-100">
           <div className="max-w-lg mx-auto px-5 py-3">
             <div className="flex items-center justify-between mb-3">
               {/* Back Button - Hidden on restricted steps */}
@@ -1460,16 +1460,18 @@ export default function AccountCreationWizard({ onComplete, onCancel }: AccountC
         </div>
       )}
 
-      {/* Content */}
-      <div className="max-w-lg mx-auto px-5 py-6 pb-32">
-        <AnimatePresence mode="wait">
-          {renderStepContent()}
-        </AnimatePresence>
+      {/* Content - flex-1 with overflow so footer can be sticky at bottom */}
+      <div className="flex-1 overflow-y-auto">
+        <div className="max-w-lg mx-auto px-5 py-6">
+          <AnimatePresence mode="wait">
+            {renderStepContent()}
+          </AnimatePresence>
+        </div>
       </div>
 
-      {/* Fixed Bottom Navigation */}
+      {/* Sticky Bottom Navigation - inside flex container, never overlaps content */}
       {currentStep.id !== 'complete' ? (
-        <div className="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-lg border-t border-gray-100 z-50">
+        <div className="flex-none bg-white/95 backdrop-blur-lg border-t border-gray-200 shadow-[0_-4px_20px_-4px_rgba(0,0,0,0.06)] z-10">
           <div className="max-w-lg mx-auto px-5 py-4">
             <button
               className={`w-full py-4 rounded-xl font-semibold text-white transition-all flex items-center justify-center gap-2 ${
@@ -1495,7 +1497,7 @@ export default function AccountCreationWizard({ onComplete, onCancel }: AccountC
           </div>
         </div>
       ) : (
-        <div className="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-lg border-t border-gray-100 z-50">
+        <div className="flex-none bg-white/95 backdrop-blur-lg border-t border-gray-200 shadow-[0_-4px_20px_-4px_rgba(0,0,0,0.06)] z-10">
           <div className="max-w-lg mx-auto px-5 py-4">
             <button
               className="w-full py-4 rounded-xl font-semibold text-white bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 transition-all flex items-center justify-center gap-2"

@@ -91,18 +91,36 @@ export default function CardsScreen() {
     setTimeout(() => setToast(null), 3000);
   };
 
-  const userCards = cards.filter((c) => c.userId === user?.id);
+  // Normalize card data so the screen can read either old or new field names
+  const normalizeCard = (card: any) => ({
+    ...card,
+    lastFourDigits: card.lastFourDigits || card.cardNumberLast4 || card.last4 || '****',
+    name: card.name || card.cardHolderName || user?.fullName || 'Cardholder',
+    type: card.type || card.cardType || 'debit',
+    cardNetwork: card.cardNetwork || (card.network ? (card.network.charAt(0).toUpperCase() + card.network.slice(1)) : 'Visa'),
+    expiryMonth: card.expiryMonth || 12,
+    expiryYear: card.expiryYear || new Date().getFullYear() + 3,
+    cvv: card.cvv || '•••',
+    color: card.color || card.design || 'navy',
+    isVirtual: card.isVirtual ?? false,
+    status: card.status || 'active',
+  });
+
+  const userCards = cards.filter((c) => c.userId === user?.id).map(normalizeCard);
   const filteredCards = activeTab === 'all'
     ? userCards
     : userCards.filter((c) => c.type === activeTab);
 
-  const getCardGradient = (card: typeof cards[0]) => {
+  const getCardGradient = (card: any) => {
     const gradients: Record<string, string> = {
       mint: 'from-[#A8E6CF] to-[#88D4AB]',
       purple: 'from-[#DDA0DD] to-[#C48BC4]',
       gold: 'from-[#F4F7C0] to-[#E5EB8A]',
       navy: 'from-[#1a1a2e] to-[#16213e]',
       coral: 'from-[#FF6B6B] to-[#EE5A5A]',
+      platinum: 'from-[#E5E4E2] to-[#BBBABE]',
+      emerald: 'from-[#50C878] to-[#0FAB7F]',
+      lavender: 'from-[#B57EDC] to-[#967BB6]',
     };
     return gradients[card.color] || gradients.navy;
   };

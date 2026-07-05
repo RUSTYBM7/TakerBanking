@@ -263,10 +263,36 @@ export const useStore = create<AppState>((set, get) => ({
       design: 'lavender',
     },
   ],
-  loans: [],
-  loanPayments: [],
-  scheduledTransfers: [],
-  billPayments: [],
+  loans: [
+    {
+      id: 'loan-1',
+      userId: 'demo-user',
+      loanType: 'personal',
+      principal: 25000,
+      outstandingBalance: 12450.00,
+      interestRate: 8.5,
+      termMonths: 36,
+      startDate: '2024-06-15',
+      endDate: '2027-06-15',
+      monthlyPayment: 786.50,
+      nextPaymentDate: '2026-08-15',
+      status: 'active',
+      purpose: 'Home renovation',
+      createdAt: '2024-06-15',
+    }
+  ],
+  loanPayments: [
+    { id: 'lp-1', loanId: 'loan-1', amount: 786.50, paidAt: '2026-07-15', principal: 600, interest: 186.50 },
+    { id: 'lp-2', loanId: 'loan-1', amount: 786.50, paidAt: '2026-06-15', principal: 595, interest: 191.50 },
+    { id: 'lp-3', loanId: 'loan-1', amount: 786.50, paidAt: '2026-05-15', principal: 590, interest: 196.50 },
+  ],
+  scheduledTransfers: [
+    { id: 'st-1', userId: 'demo-user', fromAccountId: 'acc-default-1', toAccountId: 'acc-default-2', amount: 500, frequency: 'monthly', nextRun: '2026-08-01', status: 'active', description: 'Auto-save transfer', createdAt: '2024-01-01' }
+  ],
+  billPayments: [
+    { id: 'bp-1', userId: 'demo-user', payee: 'ConEd Electricity', amount: 142.30, dueDate: '2026-08-05', status: 'scheduled', createdAt: '2026-07-01' },
+    { id: 'bp-2', userId: 'demo-user', payee: 'Verizon Wireless', amount: 85.00, dueDate: '2026-08-12', status: 'scheduled', createdAt: '2026-07-01' },
+  ],
   onboardingData: null,
   activeChatRoom: null,
   selectedUserId: null,
