@@ -23,6 +23,14 @@ const DB_PORT = 5432;
 const DB_NAME = 'postgres';
 const DB_USER = 'postgres';
 
+import dns from 'node:dns/promises';
+
+// Resolve hostname to IPv4 only (Vercel build env can't route IPv6 to Supabase)
+async function resolveIPv4(host) {
+  const addrs = await dns.lookup(host, { family: 4 });
+  return addrs.address;
+}
+
 const SCHEMA_FILE = resolve(ROOT, 'supabase', 'schema.sql');
 
 function buildConnectionString() {
@@ -32,7 +40,9 @@ function buildConnectionString() {
     console.error('[supabase-apply] ❌ SUPABASE_DB_PASSWORD or SUPABASE_DB_URL required');
     process.exit(1);
   }
-  return `postgresql://${DB_USER}:${encodeURIComponent(pwd)}@${DB_HOST}:${DB_PORT}/${DB_NAME}?sslmode=require`;
+  // Resolve to IPv4 first so pg doesn't try IPv6
+  const ipv4 = await resolveIPv4(DB_HOST).catch(() => DB_HOST);
+  return `postgresql://${DB_USER}:${encodeURIComponent(pwd)}@${ipv4}:${DB_PORT}/${DB_NAME}?sslmode=require`;
 }
 
 async function main() {
@@ -45,6 +55,7 @@ async function main() {
     ssl: { rejectUnauthorized: false },
     // Force IPv4 — Vercel's build env doesn't always route IPv6 to Supabase
     family: 4,
+    connectionTimeoutMillis: 15000,
   });
 
   try {
