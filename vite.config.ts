@@ -1,6 +1,14 @@
 import path from "path"
 import { defineConfig } from "vite"
 import react from "@vitejs/plugin-react"
+import { execSync } from "node:child_process"
+
+// Inject build SHA so the UI footer can show which commit is live
+function gitSha(): string {
+  try {
+    return execSync('git rev-parse --short HEAD', { stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim();
+  } catch { return 'dev'; }
+}
 
 // Security headers plugin for production
 function securityHeaders() {
@@ -94,5 +102,8 @@ export default defineConfig({
       'zustand',
       'framer-motion',
     ],
+  },
+  define: {
+    'import.meta.env.VITE_BUILD_SHA': JSON.stringify(gitSha()),
   },
 })

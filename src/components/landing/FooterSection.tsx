@@ -168,6 +168,11 @@ const FooterSection = () => {
             </div>
           </div>
         </div>
+
+        <div className="mt-8 pt-6 border-t border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-gray-500">
+          <div>© 2026 OrbitPay Credit Union. All rights reserved. Member NCUA. Insured by NCUA up to $250,000.</div>
+          <div className="font-mono opacity-60">build {import.meta.env.VITE_BUILD_SHA || 'dev'} · {new Date().toISOString().slice(0,10)}</div>
+        </div>
       </div>
     </footer>
   )
