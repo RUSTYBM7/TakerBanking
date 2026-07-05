@@ -18,16 +18,16 @@ export interface BrandLogoProps {
 }
 
 const variantClasses = {
-  header: 'h-8 md:h-10',
-  nav: 'h-6 md:h-7',
-  hero: 'h-12 md:h-16 lg:h-20',
-  footer: 'h-6 opacity-80',
-  auth: 'h-12 md:h-14',
-  card: 'h-5',
-  modal: 'h-8',
-  settings: 'h-7',
-  compact: 'h-6',
-  full: 'h-10 md:h-12',
+  header: 'h-10 md:h-12 lg:h-14 w-auto',
+  nav: 'h-8 md:h-10 w-auto',
+  hero: 'h-16 md:h-20 lg:h-24 w-auto',
+  footer: 'h-8 md:h-10 w-auto opacity-90',
+  auth: 'h-12 md:h-14 w-auto',
+  card: 'h-8 w-auto',
+  modal: 'h-10 w-auto',
+  settings: 'h-10 w-auto',
+  compact: 'h-8 w-auto',
+  full: 'h-12 md:h-14 w-auto',
 };
 
 export const BrandLogo: React.FC<BrandLogoProps> = ({
@@ -41,12 +41,13 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
       src={BRAND_LOGO_URL}
       alt="Orbitpay Finance"
       className={`
-        w-auto object-contain
+        object-contain object-left
         ${variantClasses[variant]}
         ${onDark ? 'brightness-110 contrast-105' : ''}
         ${className}
       `}
       style={{
+        maxWidth: '280px',
         ...style,
       }}
     />

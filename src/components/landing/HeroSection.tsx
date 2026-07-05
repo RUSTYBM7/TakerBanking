@@ -101,7 +101,8 @@ const HeroSection = () => {
             <img
               src="/assets/images/corporate-banner.jpg"
               alt="OrbitPay Finance - Banking Without Borders"
-              className="mx-auto rounded-2xl shadow-2xl shadow-emerald-500/20 max-w-3xl w-full"
+              className="mx-auto rounded-2xl shadow-2xl shadow-emerald-500/20 w-full max-w-4xl h-auto object-cover"
+              style={{ maxHeight: '400px' }}
             />
           </motion.div>
 
