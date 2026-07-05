@@ -37,18 +37,5 @@
         }
       ]
     }
-  ],
-  "rewrites": [
-    {
-      "source": "/admin",
-      "destination": "/admin-portal"
-    }
-  ],
-  "redirects": [
-    {
-      "source": "/admin",
-      "destination": "https://admin.orbitpaybank.online",
-      "permanent": false
-    }
   ]
 }
