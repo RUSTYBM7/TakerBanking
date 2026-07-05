@@ -67,7 +67,7 @@ const FooterSection = () => {
 
             {/* Featured Poster Banner */}
             <img
-              src="/assets/images/poster-banner.jpg"
+              src="/assets/images/poster-banner.png"
               alt="OrbitPay Finance - Banking Without Borders"
               className="rounded-xl shadow-lg mb-6 w-full max-w-xs"
             />

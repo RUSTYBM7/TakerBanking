@@ -117,7 +117,7 @@ const ProductsSection = () => {
               </div>
               <div className="relative h-64 md:h-auto">
                 <img
-                  src="/assets/images/mobile-app-preview.jpg"
+                  src="/assets/images/mobile-app-preview.png"
                   alt="OrbitPay Mobile Banking App"
                   className="absolute inset-0 w-full h-full object-cover"
                 />

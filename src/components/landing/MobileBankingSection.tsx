@@ -87,14 +87,14 @@ const MobileBankingSection = () => {
 
               {/* Featured App Preview Image */}
               <img
-                src="/assets/images/mobile-app-preview.jpg"
+                src="/assets/images/mobile-app-preview.png"
                 alt="OrbitPay Mobile Banking App Preview"
                 className="rounded-3xl shadow-2xl shadow-emerald-500/30 max-w-md w-full"
               />
 
               {/* Secondary Mobile Landing Image */}
               <img
-                src="/assets/images/mobile-landing-1.jpg"
+                src="/assets/images/mobile-landing-1.png"
                 alt="OrbitPay Vision Mobile Experience"
                 className="absolute -bottom-8 -right-8 rounded-2xl shadow-xl shadow-emerald-500/20 w-48 hidden lg:block"
               />

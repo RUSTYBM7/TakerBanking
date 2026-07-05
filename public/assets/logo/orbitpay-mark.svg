@@ -1,30 +1,36 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0F0A1F"/>
-      <stop offset="100%" stop-color="#1A1530"/>
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#020617"/>
     </linearGradient>
-    <linearGradient id="mark" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#6B46C1"/>
-      <stop offset="50%" stop-color="#4B0082"/>
-      <stop offset="100%" stop-color="#1A1530"/>
+    <linearGradient id="disc" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="50%" stop-color="#14B8A6"/>
+      <stop offset="100%" stop-color="#0D9488"/>
     </linearGradient>
     <linearGradient id="ring" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#D4AF37"/>
-      <stop offset="100%" stop-color="#B8941F"/>
+      <stop offset="0%" stop-color="#34D399"/>
+      <stop offset="100%" stop-color="#0EA5E9"/>
     </linearGradient>
   </defs>
 
-  <rect width="512" height="512" rx="96" fill="url(#bg)"/>
+  <!-- Dark rounded square -->
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
 
-  <!-- Orbital rings -->
-  <ellipse cx="256" cy="256" rx="220" ry="72" fill="none" stroke="url(#ring)" stroke-width="6" opacity="0.85" transform="rotate(-25 256 256)"/>
-  <ellipse cx="256" cy="256" rx="190" ry="60" fill="none" stroke="#6B46C1" stroke-width="4" opacity="0.7" transform="rotate(35 256 256)"/>
+  <!-- Outer orbital ring -->
+  <ellipse cx="256" cy="256" rx="218" ry="70" fill="none" stroke="url(#ring)" stroke-width="5" opacity="0.85" transform="rotate(-22 256 256)"/>
+  <!-- Middle orbital ring (different angle) -->
+  <ellipse cx="256" cy="256" rx="186" ry="58" fill="none" stroke="#0EA5E9" stroke-width="3" opacity="0.55" transform="rotate(32 256 256)"/>
 
-  <!-- Inner disc -->
-  <circle cx="256" cy="256" r="120" fill="url(#mark)"/>
-  <circle cx="256" cy="256" r="20" fill="#D4AF37"/>
+  <!-- Inner emerald disc -->
+  <circle cx="256" cy="256" r="118" fill="url(#disc)"/>
 
-  <!-- OP letters -->
-  <text x="256" y="296" font-family="sans-serif" font-size="160" font-weight="900" text-anchor="middle" fill="#FFFFFF" letter-spacing="-6">OP</text>
+  <!-- Center node (small bright dot) -->
+  <circle cx="256" cy="256" r="14" fill="#FFFFFF"/>
+  <circle cx="256" cy="256" r="9" fill="#10B981"/>
+
+  <!-- Stylized "O" letterform -->
+  <circle cx="256" cy="256" r="78" fill="none" stroke="#FFFFFF" stroke-width="9"/>
+  <circle cx="256" cy="256" r="20" fill="#FFFFFF"/>
 </svg>

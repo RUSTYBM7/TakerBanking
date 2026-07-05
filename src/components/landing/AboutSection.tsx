@@ -14,9 +14,9 @@ const AboutSection = () => {
   ]
 
   const branchImages = [
-    '/assets/images/building-global-hq.jpg',
-    '/assets/images/mobile-app-preview.jpg',
-    '/assets/images/poster-banner.jpg'
+    '/assets/images/building-global-hq.png',
+    '/assets/images/mobile-app-preview.png',
+    '/assets/images/poster-banner.png'
   ]
 
   return (

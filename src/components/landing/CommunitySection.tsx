@@ -15,10 +15,10 @@ const CommunitySection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   const branchImages = [
-    '/assets/images/building-global-hq.jpg',
-    '/assets/images/poster-banner.jpg',
-    '/assets/images/mobile-app-preview.jpg',
-    '/assets/images/mobile-landing-1.jpg'
+    '/assets/images/building-global-hq.png',
+    '/assets/images/poster-banner.png',
+    '/assets/images/mobile-app-preview.png',
+    '/assets/images/mobile-landing-1.png'
   ]
 
   const initiatives = [

@@ -106,13 +106,13 @@ const HeroSection = () => {
               loop
               playsInline
               preload="metadata"
-              poster="/assets/images/corporate-banner.jpg"
+              poster="/assets/images/corporate-banner.png"
               controls
               aria-label="OrbitPay Credit Union — Banking Without Borders"
             >
               <source src="/assets/videos/orbitpay-hero.mp4" type="video/mp4" />
               <img
-                src="/assets/images/corporate-banner.jpg"
+                src="/assets/images/corporate-banner.png"
                 alt="OrbitPay Credit Union - Banking Without Borders"
                 className="mx-auto rounded-2xl w-full max-w-4xl h-auto"
                 style={{ maxHeight: '420px' }}
