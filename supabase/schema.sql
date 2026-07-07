@@ -429,5 +429,135 @@ create view v_trial_balance as
   group by account_id, currency;
 
 -- =============================================================================
+-- RPC FUNCTIONS FOR BANKING OPERATIONS
+-- =============================================================================
+
+-- Transfer funds between accounts (atomic operation)
+create or replace function transfer_funds(
+  p_from_account_id uuid,
+  p_to_account_id uuid,
+  p_amount numeric(20,4),
+  p_description text default 'Transfer'
+) returns jsonb
+language plpgsql
+security definer
+as $$
+declare
+  v_from_balance numeric(20,4);
+  v_result jsonb;
+begin
+  -- Lock accounts for update to prevent race conditions
+  select balance into v_from_balance
+  from accounts
+  where id = p_from_account_id
+  for update;
+
+  -- Check sufficient funds
+  if v_from_balance < p_amount then
+    return jsonb_build_object(
+      'success', false,
+      'error', 'Insufficient funds'
+    );
+  end if;
+
+  -- Debit from source account
+  update accounts
+  set balance = balance - p_amount,
+      available_balance = available_balance - p_amount,
+      updated_at = now()
+  where id = p_from_account_id;
+
+  -- Credit to destination account
+  update accounts
+  set balance = balance + p_amount,
+      available_balance = available_balance + p_amount,
+      updated_at = now()
+  where id = p_to_account_id;
+
+  -- Record transactions
+  insert into transactions (account_id, member_id, txn_type, amount, currency, description, status)
+  select p_from_account_id, member_id, 'transfer', -p_amount, currency, p_description, 'posted'
+  from accounts where id = p_from_account_id;
+
+  insert into transactions (account_id, member_id, txn_type, amount, currency, description, status)
+  select p_to_account_id, member_id, 'transfer', p_amount, currency, p_description, 'posted'
+  from accounts where id = p_to_account_id;
+
+  return jsonb_build_object(
+    'success', true,
+    'message', 'Transfer completed successfully'
+  );
+end;
+$$;
+
+-- Get account balance with real-time lock
+create or replace function get_account_balance(p_account_id uuid)
+returns numeric(20,4)
+language plpgsql
+security definer
+as $$
+declare
+  v_balance numeric(20,4);
+begin
+  select balance into v_balance
+  from accounts
+  where id = p_account_id;
+  return v_balance;
+end;
+$$;
+
+-- Update KYC status with audit logging
+create or replace function update_kyc_status(
+  p_member_id uuid,
+  p_status kyc_status,
+  p_admin_id uuid
+) returns jsonb
+language plpgsql
+security definer
+as $$
+begin
+  -- Update member KYC status
+  update members
+  set kyc_status = p_status,
+      kyc_approved_at = case when p_status = 'approved' then now() else kyc_approved_at end,
+      updated_at = now()
+  where id = p_member_id;
+
+  -- Create audit log
+  insert into audit_logs (actor_id, actor_type, action, resource_type, resource_id, diff)
+  values (p_admin_id, 'employee', 'kyc_status_update', 'members', p_member_id, jsonb_build_object('new_status', p_status));
+
+  return jsonb_build_object(
+    'success', true,
+    'message', 'KYC status updated'
+  );
+end;
+$$;
+
+-- Get real-time notification count
+create or replace function get_unread_notification_count(p_member_id uuid)
+returns integer
+language plpgsql
+security definer
+as $$
+declare
+  v_count integer;
+begin
+  select count(*) into v_count
+  from notifications
+  where member_id = p_member_id and is_read = false;
+  return v_count;
+end;
+$$;
+
+-- =============================================================================
+-- ENABLE REALTIME FOR TABLES
+-- =============================================================================
+alter publication supabase_realtime add table accounts;
+alter publication supabase_realtime add table transactions;
+alter publication supabase_realtime add table notifications;
+alter publication supabase_realtime add table support_tickets;
+
+-- =============================================================================
 -- MIGRATION COMPLETE
 -- =============================================================================
